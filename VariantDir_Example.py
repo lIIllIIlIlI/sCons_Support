@@ -41,10 +41,9 @@ env = Environment(
 moduleFlags = buildInfo.toolchain.generaleModuleCompilerFlags
 
 sourceFiles = buildInfo.pathInfo.sourceCodeFiles
-regularSourceFiles = [sourcFile for sourcFile in sourceFiles if sourcFile not in moduleFlags]
 
-linkedSourceList = [linkedDir + "\\" + str(Path("06_MCAL/Adc") / Path(regularSourceFile).stem) for regularSourceFile in regularSourceFiles]
-for source in regularSourceFiles:
+linkedSourceList = [linkedDir + "\\" + str(Path("06_MCAL/Adc") / Path(sourceFile).stem) for sourceFile in sourceFiles]
+for source in sourceFiles:
     _ = LinkDir(Path(source).parent, str(Path(linkedDir) / Path(source).stem))
 
 objectList = env.Object(linkedSourceList)
